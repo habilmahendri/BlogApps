@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="10dp"
+    android:id="@+id/containerCv"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/tvTitle"
+                android:layout_toLeftOf="@id/imgMenuOption"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Judul" />
+
+            <ImageView
+                android:id="@+id/imgMenuOption"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tvDesc"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="Deskripsi" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
