@@ -1,5 +1,6 @@
 package com.core.di
 
+import com.core.BuildConfig
 import com.core.model.repository.remote.RemoteDataSource
 import com.core.network.ApiInterface
 import com.core.utils.Const.NETWORK_TIMEOUT
@@ -30,7 +31,7 @@ val networkModule = module{
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://limitless-forest-49003.herokuapp.com/")
+            .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(get())

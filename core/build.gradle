@@ -18,8 +18,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "API_URL", "\"https://limitless-forest-49003.herokuapp.com/\""
+        }
         release {
             minifyEnabled false
+            buildConfigField "String", "API_URL", "\"https://limitless-forest-49003.herokuapp.com/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
