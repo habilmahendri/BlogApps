@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".ui.createupdate.CreateUpdateActivity">
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/filledTextField"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/title">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:id="@+id/edtTitle"
+        android:layout_height="wrap_content"
+        />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_marginTop="20dp"
+      android:layout_height="wrap_content"
+      android:hint="@string/content">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:id="@+id/edtContent"
+        android:layout_height="wrap_content"
+        />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <Button
+      android:textColor="@color/white"
+      android:backgroundTint="@color/teal_700"
+      android:layout_marginTop="30dp"
+      android:id="@+id/btnSubmit"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/submit"/>
+</LinearLayout>

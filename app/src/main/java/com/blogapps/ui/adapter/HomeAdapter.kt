@@ -13,6 +13,12 @@ import kotlinx.android.synthetic.main.item_view_home.view.*
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.widget.PopupMenu
+import com.blogapps.ui.createupdate.CreateUpdateActivity
+import androidx.core.content.ContextCompat.startActivity
+
+import android.os.Bundle
+import androidx.core.content.ContextCompat
+import com.blogapps.utils.ObjectWrapperForBinder
 
 
 class HomeAdapter (private val data: List<BlogDataItem>, private val context: Context?,private val delete:(BlogDataItem)->Unit) :
@@ -47,9 +53,10 @@ class HomeAdapter (private val data: List<BlogDataItem>, private val context: Co
                     popup.setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.update ->  {
-                                Log.d("UPDATE","UPDATE")
+                                val bundle = Bundle()
+                                bundle.putBinder("object_value", ObjectWrapperForBinder(data))
+                                context.startActivity(Intent(context, CreateUpdateActivity::class.java).putExtras(bundle).putExtra("UPDATE",true))
                                 true
-
                             }
                             R.id.delete ->  {
                                 delete(data)

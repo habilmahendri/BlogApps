@@ -2,6 +2,7 @@ package com.core.model.repository
 
 import com.core.domain.repository.AppRepository
 import com.core.model.data.BlogDataItem
+import com.core.model.data.BlogPost
 import com.core.model.data.HomeData
 import com.core.model.repository.remote.RemoteDataSource
 import io.reactivex.Observable
@@ -23,6 +24,20 @@ class AppRepositoryImpl constructor(private val remoteDataSource: RemoteDataSour
 
     override fun deleteBlog(id: Int): Observable<BlogDataItem> {
         val remoteSource = remoteDataSource.deleteBlog(id)
+            .flatMap { Observable.just(it.asResult().data) }
+            .onErrorResumeNext { t: Throwable -> return@onErrorResumeNext Observable.error(t) }
+        return Observable.concatArrayEager(remoteSource)
+    }
+
+    override fun createBlog(data: BlogPost): Observable<BlogDataItem> {
+        val remoteSource = remoteDataSource.create(data)
+            .flatMap { Observable.just(it.asResult().data) }
+            .onErrorResumeNext { t: Throwable -> return@onErrorResumeNext Observable.error(t) }
+        return Observable.concatArrayEager(remoteSource)
+    }
+
+    override fun updateBlog(id: Int, data: BlogPost): Observable<BlogDataItem> {
+        val remoteSource = remoteDataSource.update(id,data)
             .flatMap { Observable.just(it.asResult().data) }
             .onErrorResumeNext { t: Throwable -> return@onErrorResumeNext Observable.error(t) }
         return Observable.concatArrayEager(remoteSource)

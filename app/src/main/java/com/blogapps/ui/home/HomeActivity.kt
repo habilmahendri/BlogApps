@@ -1,16 +1,16 @@
 package com.blogapps.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blogapps.R
 import com.blogapps.ui.adapter.HomeAdapter
+import com.blogapps.ui.createupdate.CreateUpdateActivity
 import com.blogapps.utils.NetworkState.Companion.ERROR
 import com.blogapps.utils.NetworkState.Companion.LOADED
 import com.blogapps.utils.NetworkState.Companion.LOADING
-import com.blogapps.utils.hide
-import com.blogapps.utils.show
 import com.blogapps.utils.toast
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,8 +22,13 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        initViewModel()
         observerLiveData()
+        initOnClick()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initViewModel()
     }
 
     private fun initViewModel() {
@@ -46,16 +51,27 @@ class HomeActivity : AppCompatActivity() {
         viewModel.networkState.observe(this, Observer {
             when (it) {
                 LOADED ->{
-                    pg.hide()
+                    swipeRefresh.isRefreshing = false
                 }
                 LOADING -> {
-                    pg.show()
+                    swipeRefresh.isRefreshing = true
+
                 }
                 ERROR -> {
                     toast(it.message)
-                    pg.hide()
+                    swipeRefresh.isRefreshing = false
                 }
             }
         })
+    }
+
+    private fun initOnClick() {
+        fab.setOnClickListener {
+            startActivity(Intent(this,CreateUpdateActivity::class.java))
+        }
+
+        swipeRefresh.setOnRefreshListener {
+            initViewModel()
+        }
     }
 }
